@@ -239,18 +239,21 @@ void DeviceDialog::executeDefaultDecision()
     on_allow_button_clicked();
     break;
 
-  case Rule::Target::Block:
-    on_block_button_clicked();
+  case Rule::Target::Reject:
+    on_reject_button_clicked();
     break;
 
-  case Rule::Target::Reject:
+  case Rule::Target::Block:
   case Rule::Target::Unknown:
   case Rule::Target::Empty:
   case Rule::Target::Invalid:
   case Rule::Target::Device:
   case Rule::Target::Match:
   default:
-    on_allow_button_clicked();
+    // Fail safe: when the default decision is Block (or anything unexpected,
+    // or the dialog simply timed out), keep the device blocked instead of
+    // silently allowing it.
+    on_block_button_clicked();
   }
 }
 
