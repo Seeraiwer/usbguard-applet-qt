@@ -1,6 +1,13 @@
 cmake_minimum_required(VERSION 3.10)
 project(usbguard-applet-qt)
 
+# Default to an optimized build when the user did not choose a configuration
+# (single-config generators only). Packaging passes its own build type, so
+# this never overrides an explicit -DCMAKE_BUILD_TYPE.
+if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+  set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)
+endif()
+
 find_package(Qt6 6.0 CONFIG REQUIRED COMPONENTS Core Gui Widgets DBus LinguistTools)
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(USBGUARD REQUIRED IMPORTED_TARGET libusbguard)
