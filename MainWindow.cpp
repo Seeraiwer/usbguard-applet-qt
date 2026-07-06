@@ -144,6 +144,9 @@ MainWindow::~MainWindow()
 void MainWindow::showDeviceDialog(quint32 id, const Rule& device_rule)
 {
   auto dialog = new DeviceDialog(id);
+  // The dialog is modeless and parentless; delete it once it closes so we do
+  // not leak one dialog per device that triggers it.
+  dialog->setAttribute(Qt::WA_DeleteOnClose);
   dialog->setRejectVisible(ui->show_reject_button_checkbox->isChecked());
   dialog->setDefaultDecisionTimeout(ui->decision_timeout->value());
   dialog->setMaskSerialNumber(ui->mask_serial_checkbox->isChecked());
