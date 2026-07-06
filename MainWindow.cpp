@@ -100,7 +100,7 @@ void MainWindow::setupSystemTray()
 {
   systray = new QSystemTrayIcon(QIcon(QLatin1String(":/usbguard-icon-inactive.svg")), this);
   systray->setToolTip(tr("USBGuard"));
-  auto menu = new QMenu();
+  auto menu = new QMenu(this);
   auto quit_action = new QAction(tr("Quit"), systray);
   menu->addAction(quit_action);
   systray->setContextMenu(menu);

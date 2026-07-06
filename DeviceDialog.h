@@ -69,7 +69,6 @@ protected:
   void accept();
   void updateDialog();
   void executeDefaultDecision();
-  void setPosition(bool randomized);
 
 private Q_SLOTS:
   void on_allow_button_clicked();
@@ -81,7 +80,6 @@ private:
   Rule::Target _default_decision;
   quint32 _default_decision_timeout;
   DecisionMethod _decision_method;
-  bool _reject_enabled;
   bool _mask_serial_number;
   bool _decision_is_permanent;
 
@@ -90,10 +88,7 @@ private:
 
   quint32 device_id;
 
-  QString _name;
   QString _serial;
-  QString _device_id;
-  QStringList _interface_types;
 };
 
 /* vim: set ts=2 sw=2 et */

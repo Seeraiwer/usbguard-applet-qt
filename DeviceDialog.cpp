@@ -136,6 +136,10 @@ static int randomInteger(int a, int b)
     min_val = a;
     max_val = b;
   }
+  if (min_val == max_val) {
+    // QRandomGenerator::bounded() requires lowest < highest.
+    return min_val;
+  }
   return QRandomGenerator::global()->bounded(min_val, max_val);
 }
 
@@ -148,8 +152,8 @@ void DeviceDialog::setRandomizePosition(bool randomize)
   if (randomize) {
     const int h = ui->block_button->height();
     const int w = ui->block_button->width();
-    const int dy = randomInteger(-2.618*h, 2.618*h);
-    const int dx = randomInteger(-2.618*w, 2.618*w);
+    const int dy = randomInteger(static_cast<int>(-2.618 * h), static_cast<int>(2.618 * h));
+    const int dx = randomInteger(static_cast<int>(-2.618 * w), static_cast<int>(2.618 * w));
     position_rect.translate(dx, dy);
   }
 

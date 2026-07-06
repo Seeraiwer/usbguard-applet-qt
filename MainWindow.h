@@ -85,13 +85,14 @@ protected Q_SLOTS:
   void clearDeviceList();
   void resetDeviceList();
 
-  void changeEvent(QEvent* e) override;
-  void closeEvent(QCloseEvent* e) override;
-
   void setupSystemTray();
   void setupSettingsWatcher();
   void startFlashing();
   void stopFlashing();
+
+protected:
+  void changeEvent(QEvent* e) override;
+  void closeEvent(QCloseEvent* e) override;
 
 private:
   Ui::MainWindow* ui;
