@@ -429,7 +429,7 @@ bool DeviceModel::setData(const QModelIndex &index, const QVariant &value, int r
       item->setRequestedTarget(target);
       Q_EMIT dataChanged(createIndex(item->row(), 0, item),
         createIndex(item->row(), item->columnCount() - 1, item),
-        QVector<int>() << Qt::DisplayRole);
+        QVector<int>{Qt::DisplayRole, RuleTarget});
       return true;
     }
 
@@ -471,7 +471,7 @@ void DeviceModel::updateDeviceTarget(quint32 device_id, Rule::Target target)
     item->setDeviceTarget(target);
     Q_EMIT dataChanged(createIndex(item->row(), 0, item),
       createIndex(item->row(), item->columnCount() - 1, item),
-      QVector<int>() << Qt::DisplayRole);
+      QVector<int>{Qt::DisplayRole, RuleTarget});
   }
 }
 
