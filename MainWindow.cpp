@@ -83,6 +83,17 @@ MainWindow::MainWindow(QWidget* parent) :
   new QShortcut(QKeySequence(Qt::Key_Escape, Qt::Key_Escape), this, this, &MainWindow::showMinimized);
 
   QTimer::singleShot(1000, this, &MainWindow::dbusTryConnect);
+
+  /*
+   * Without a system tray (e.g. a bare window manager with no tray/status
+   * area) the icon never appears and, since the window starts minimized and
+   * hidden, there would be no way to summon it. Show the window directly in
+   * that case so the applet stays usable.
+   */
+  if (!QSystemTrayIcon::isSystemTrayAvailable()) {
+    qCWarning(LOG) << "No system tray available; showing the main window directly.";
+    showNormal();
+  }
 }
 
 void MainWindow::setupSystemTray()
